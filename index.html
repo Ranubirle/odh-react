@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            padding:10px;
+            margin:auto;
+            border:1px solid black;
+            width:40%;
+            margin-top: 40px;
+        }
+        .container #input{
+            width:87%;
+            height:20px;
+        }
+        .container #btn{
+            width:50px;
+            height:25px;
+        }
+        
+         .container #error{
+            color:red;
+            font-size: 14px;
+        }
+        .container ul{
+            list-style: none;
+            pading:0px;
+        }
+        .container li{
+            color:red;
+        }
+        .container li a{
+            float:right;
+            color:red;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .h1{
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        
+        
+    </style>
+    <script>
+        document.getElementById("error").innerHTML='';
+        let input=document.getElementById('input').value;
+        let btn=document.getElementById("btn");
+        
+        function mytodo(){
+            document.getElementById("error").innerHTML='';
+        let input=document.getElementById('input').value;
+            if(input==''){
+                document.getElementById("error").innerHTML="please enter item";
+            }
+            else{
+               let box= document.getElementById('box');
+               let li=document.createElement('li');
+               li.textContent=input;
+               box.appendChild(li);
+               let pos=box.firstElementChild;
+               if(pos==null){
+                box.appendChild(li);
+               }
+               else{
+                box.insertBefore(li,pos)
+               }
+               let a =document.createElement('a');
+               a.textContent='x';
+               a.href="javascript:void(0)"
+               a.className="remove";
+               li.appendChild(a);
+            }
+            document.getElementById('input').value='';
+
+            console.log("item added");
+        
+        let b=document.querySelector('ul');
+        
+        b.addEventListener('click',function(e){
+            let box=document.getElementById('box');
+            let li=e.target.parentNode;
+            box.removeChild(li);
+
+        })
+    }
+        
+    </script>
+</head>
+<body>
+    <h1 class="h1">To-Do list</h1>
+    
+    <div class="container">
+        <ul id="box"></ul>
+    <input  type="text" id="input" placeholder="enter your item">
+    <button id="btn" onclick="mytodo()">Add</button><br>
+    <span id="error"></span>
+    </div>
+    
+</body>
+</html>
